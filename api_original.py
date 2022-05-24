@@ -1,4 +1,4 @@
-#!/usr/bin/env python3 
+#!/usr/bin/env python3
 
 import xmlrpc.client
 
@@ -154,7 +154,7 @@ class VG():
             return RET_FAIL
         else:
             return RET_OK
-                        
+
     def release(self, t_index, channelA, channelB, waiting):
         '''
         Turns the choosen channels off
@@ -165,7 +165,7 @@ class VG():
         @type waiting bool
         @param channelA: True turns the channel off, False leaves the channel running
         @param channelB: True turns the channel off, False leaves the channel running
-        @param waiting: Wait for complete vacuum loss or not? 
+        @param waiting: Wait for complete vacuum loss or not?
         '''
         if self.isconn(t_index) is False:
             return CONN_ERR
@@ -335,7 +335,7 @@ class RG():
         @param fwait: wait for the move to end or not?
         '''
         if self.isconn(t_index) is False:
-            return CONN_ERR        
+            return CONN_ERR
 
         self.cb.rg_grip(t_index, float(twidth), float(tforce))
 
@@ -369,7 +369,7 @@ class RG():
         @param fwait: wait for the grip to end or not?
         '''
         if self.isconn(t_index) is False:
-            return CONN_ERR        
+            return CONN_ERR
 
         self.cb.rg_grip(t_index, float(twidth), float(tforce))
 
@@ -399,7 +399,7 @@ class RG():
                 return RET_FAIL
             return RET_FAIL
         else:
-            return RET_OK    
+            return RET_OK
 
 
     def halt(self, t_index):
@@ -410,22 +410,22 @@ class RG():
         @type t_index: int
         '''
         if self.isconn(t_index) is False:
-            return CONN_ERR    
+            return CONN_ERR
         return self.cb.rg_stop(t_index)
-              
+
     def get_speed(self, t_index):
         '''
         Returns with the grippers speeds
 
         @param t_index: The position of the device (0 for single, 1 for dual primary, 2 for dual secondary)
         @type t_index: int
-        
+
         @rtype: float
         @return: Speed in mm/s
         '''
         if self.isconn(t_index) is False:
-            return CONN_ERR   
-        return self.cb.rg_get_speed(t_index)      
+            return CONN_ERR
+        return self.cb.rg_get_speed(t_index)
 
     def get_depth(self, t_index):
         '''
@@ -433,12 +433,12 @@ class RG():
 
         @param t_index: The position of the device (0 for single, 1 for dual primary, 2 for dual secondary)
         @type t_index: int
-        
+
         @rtype: float
         @return: Depth in mm
         '''
         if self.isconn(t_index) is False:
-            return CONN_ERR   
+            return CONN_ERR
         return self.cb.rg_get_depth(t_index)
 
     def get_rel_depth(self, t_index):
@@ -447,12 +447,12 @@ class RG():
 
         @param t_index: The position of the device (0 for single, 1 for dual primary, 2 for dual secondary)
         @type t_index: int
-        
+
         @rtype: float
         @return: Depth in mm
         '''
         if self.isconn(t_index) is False:
-            return CONN_ERR   
+            return CONN_ERR
         return self.cb.rg_get_relative_depth(t_index)
 
     def get_width(self, t_index):
@@ -461,12 +461,12 @@ class RG():
 
         @param t_index: The position of the device (0 for single, 1 for dual primary, 2 for dual secondary)
         @type t_index: int
-        
+
         @rtype: float
         @return: Width in mm
         '''
         if self.isconn(t_index) is False:
-            return CONN_ERR   
+            return CONN_ERR
         return self.cb.rg_get_width(t_index)
 
     def get_ft_offset(self, t_index):
@@ -475,12 +475,12 @@ class RG():
 
         @param t_index: The position of the device (0 for single, 1 for dual primary, 2 for dual secondary)
         @type t_index: int
-        
+
         @rtype: float
         @return: Fingertip offset in mm
         '''
         if self.isconn(t_index) is False:
-            return CONN_ERR   
+            return CONN_ERR
         return self.cb.rg_get_fingertip_offset(t_index)
 
     def isBusy(self, t_index):
@@ -489,12 +489,12 @@ class RG():
 
         @param t_index: The position of the device (0 for single, 1 for dual primary, 2 for dual secondary)
         @type t_index: int
-        
+
         @rtype: bool
         @return: True if busy, False otherwise
         '''
         if self.isconn(t_index) is False:
-            return CONN_ERR   
+            return CONN_ERR
         return self.cb.rg_get_busy(t_index)
 
     def isGripped(self, t_index):
@@ -503,12 +503,12 @@ class RG():
 
         @param t_index: The position of the device (0 for single, 1 for dual primary, 2 for dual secondary)
         @type t_index: int
-        
+
         @rtype: bool
         @return: True if gripped, False otherwise
         '''
         if self.isconn(t_index) is False:
-            return CONN_ERR   
+            return CONN_ERR
         return self.cb.rg_get_grip_detected(t_index)
 
     def isSafetyON(self, t_index):
@@ -517,12 +517,12 @@ class RG():
 
         @param t_index: The position of the device (0 for single, 1 for dual primary, 2 for dual secondary)
         @type t_index: int
-        
+
         @rtype: bool
         @return: True if safety triggered, False otherwise
         '''
         if self.isconn(t_index) is False:
-            return CONN_ERR   
+            return CONN_ERR
         s1 = self.cb.rg_get_s1_triggered(t_index)
         s2 = self.cb.rg_get_s2_triggered(t_index)
         if (s1 or s2):
@@ -540,9 +540,9 @@ class RG():
         @type   ft_offset: float
         '''
         if self.isconn(t_index) is False:
-            return CONN_ERR   
+            return CONN_ERR
         return self.cb.rg_set_fingertip_offset(t_index, float(ft_offset))
-            
+
     def resetpower(self, t_index):
         '''
         Resets the power of the grippers\n
@@ -553,7 +553,7 @@ class RG():
         '''
         if self.isconn(t_index) is False:
             return CONN_ERR
-        self.cb.cb_reset_tool_power()  
+        self.cb.cb_reset_tool_power()
 
 
 class THREEFG():
@@ -578,7 +578,7 @@ class THREEFG():
             tp_popup("No 3FG device connected", DR_PM_WARNING)
             return False
         else:
-            return True 
+            return True
 
     def get_min_diam(self, t_index):
         '''
@@ -589,7 +589,7 @@ class THREEFG():
         @rtype: float
         '''
         if self.isconn(t_index) is False:
-            return CONN_ERR    
+            return CONN_ERR
         return self.cb.tfg_get_min_diameter(t_index)
 
     def get_max_diam(self, t_index):
@@ -601,7 +601,7 @@ class THREEFG():
         @rtype: float
         '''
         if self.isconn(t_index) is False:
-            return CONN_ERR    
+            return CONN_ERR
         return self.cb.tfg_get_max_diameter(t_index)
 
     def get_diam(self, t_index):
@@ -613,7 +613,7 @@ class THREEFG():
         @rtype: float
         '''
         if self.isconn(t_index) is False:
-            return CONN_ERR    
+            return CONN_ERR
         return self.cb.tfg_get_diameter(t_index)
 
     def get_raw_diam(self, t_index):
@@ -625,7 +625,7 @@ class THREEFG():
         @rtype: float
         '''
         if self.isconn(t_index) is False:
-            return CONN_ERR    
+            return CONN_ERR
         return self.cb.tfg_get_diameter_raw(t_index)
 
     def get_force(self, t_index):
@@ -637,7 +637,7 @@ class THREEFG():
         @rtype: float
         '''
         if self.isconn(t_index) is False:
-            return CONN_ERR    
+            return CONN_ERR
         return self.cb.tfg_get_force(t_index)
 
     def get_finger_pos(self, t_index):
@@ -649,7 +649,7 @@ class THREEFG():
         @rtype: int
         '''
         if self.isconn(t_index) is False:
-            return CONN_ERR    
+            return CONN_ERR
         return self.cb.tfg_get_finger_position(t_index)
 
     def get_finger_len(self, t_index):
@@ -661,7 +661,7 @@ class THREEFG():
         @rtype: float
         '''
         if self.isconn(t_index) is False:
-            return CONN_ERR    
+            return CONN_ERR
         return self.cb.tfg_get_finger_length(t_index)
 
     def isBusy(self, t_index):
@@ -670,12 +670,12 @@ class THREEFG():
 
         @param t_index: The position of the device (0 for single, 1 for dual primary, 2 for dual secondary)
         @type t_index: int
-        
+
         @rtype: bool
         @return: True if busy, False otherwise
         '''
         if self.isconn(t_index) is False:
-            return CONN_ERR   
+            return CONN_ERR
         return self.cb.tfg_get_busy(t_index)
 
     def isForceGripped(self, t_index):
@@ -684,12 +684,12 @@ class THREEFG():
 
         @param t_index: The position of the device (0 for single, 1 for dual primary, 2 for dual secondary)
         @type t_index: int
-        
+
         @rtype: bool
         @return: True if force gripped, False otherwise
         '''
         if self.isconn(t_index) is False:
-            return CONN_ERR   
+            return CONN_ERR
         return self.cb.tfg_get_force_grip_detected(t_index)
 
     def isGripped(self, t_index):
@@ -698,12 +698,12 @@ class THREEFG():
 
         @param t_index: The position of the device (0 for single, 1 for dual primary, 2 for dual secondary)
         @type t_index: int
-        
+
         @rtype: bool
         @return: True if gripped, False otherwise
         '''
         if self.isconn(t_index) is False:
-            return CONN_ERR   
+            return CONN_ERR
         return self.cb.tfg_get_grip_detected(t_index)
 
     def move(self, t_index, diam, f_wait):
@@ -742,7 +742,7 @@ class THREEFG():
                 return RET_OK
             return RET_FAIL
         else:
-            return RET_OK  
+            return RET_OK
 
     def grip_int(self, t_index, diam, force, f_wait):
         '''
@@ -755,7 +755,7 @@ class THREEFG():
         @type force: float
         @type f_wait: bool
         @param f_wait: wait for the grip to end or not?
-        '''        
+        '''
         if self.isconn(t_index) is False:
             return CONN_ERR
 
@@ -824,7 +824,7 @@ class THREEFG():
         @type force: float
         @type f_wait: bool
         @param f_wait: wait for the grip to end or not?
-        '''        
+        '''
         if self.isconn(t_index) is False:
             return CONN_ERR
 
@@ -894,7 +894,7 @@ class THREEFG():
         @type force: float
         @type f_wait: bool
         @param f_wait: wait for the grip to end or not?
-        '''        
+        '''
         if self.isconn(t_index) is False:
             return CONN_ERR
 
@@ -962,7 +962,7 @@ class THREEFG():
         @type force: float
         @type f_wait: bool
         @param f_wait: wait for the grip to end or not?
-        '''        
+        '''
         if self.isconn(t_index) is False:
             return CONN_ERR
 
@@ -1105,13 +1105,13 @@ class TWOFG():
 
         @param t_index: The position of the device (0 for single, 1 for dual primary, 2 for dual secondary)
         @type t_index: int
-        
+
         @rtype: bool
         @return: True if busy, False otherwise
         '''
         if self.isconn(t_index) is False:
             return CONN_ERR
-        return self.cb.twofg_get_busy(t_index)        
+        return self.cb.twofg_get_busy(t_index)
 
     def isGripped(self, t_index):
         '''
@@ -1119,7 +1119,7 @@ class TWOFG():
 
         @param t_index: The position of the device (0 for single, 1 for dual primary, 2 for dual secondary)
         @type t_index: int
-        
+
         @rtype: bool
         @return: True if gripped, False otherwise
         '''
@@ -1134,12 +1134,12 @@ class TWOFG():
 
         @param t_index: The position of the device (0 for single, 1 for dual primary, 2 for dual secondary)
         @type t_index: int
-        
+
         @rtype: int
         @return: Status code of the device
         '''
         if self.isconn(t_index) is False:
-            return CONN_ERR   
+            return CONN_ERR
         status = self.cb.twofg_get_status(t_index)
         return status
 
@@ -1150,9 +1150,9 @@ class TWOFG():
         @param t_index: The position of the device (0 for single, 1 for dual primary, 2 for dual secondary)
         @return: External width in mm
         @rtype: float
-        '''       
+        '''
         if self.isconn(t_index) is False:
-            return CONN_ERR   
+            return CONN_ERR
         extWidth = self.cb.twofg_get_external_width(t_index)
         return extWidth
 
@@ -1163,9 +1163,9 @@ class TWOFG():
         @param t_index: The position of the device (0 for single, 1 for dual primary, 2 for dual secondary)
         @return: Internal width in mm
         @rtype: float
-        '''     
+        '''
         if self.isconn(t_index) is False:
-            return CONN_ERR   
+            return CONN_ERR
         intWidth = self.cb.twofg_get_internal_width(t_index)
         return intWidth
 
@@ -1176,9 +1176,9 @@ class TWOFG():
         @param t_index: The position of the device (0 for single, 1 for dual primary, 2 for dual secondary)
         @return: Minimum external width in mm
         @rtype: float
-        '''     
+        '''
         if self.isconn(t_index) is False:
-            return CONN_ERR       
+            return CONN_ERR
         extMinWidth = self.cb.twofg_get_min_external_width(t_index)
         return extMinWidth
 
@@ -1189,9 +1189,9 @@ class TWOFG():
         @param t_index: The position of the device (0 for single, 1 for dual primary, 2 for dual secondary)
         @return: Minimum internal width in mm
         @rtype: float
-        '''        
+        '''
         if self.isconn(t_index) is False:
-            return CONN_ERR   
+            return CONN_ERR
         intMinWidth = self.cb.twofg_get_min_internal_width(t_index)
         return intMinWidth
 
@@ -1204,7 +1204,7 @@ class TWOFG():
         @rtype: float
         '''
         if self.isconn(t_index) is False:
-            return CONN_ERR   
+            return CONN_ERR
         extMaxWidth = self.cb.twofg_get_max_external_width(t_index)
         return extMaxWidth
 
@@ -1217,7 +1217,7 @@ class TWOFG():
         @rtype: float
         '''
         if self.isconn(t_index) is False:
-            return CONN_ERR   
+            return CONN_ERR
         intMaxWidth = self.cb.twofg_get_max_internal_width(t_index)
         return intMaxWidth
 
@@ -1228,9 +1228,9 @@ class TWOFG():
         @param t_index: The position of the device (0 for single, 1 for dual primary, 2 for dual secondary)
         @return: Force in N
         @rtype: float
-        '''        
+        '''
         if self.isconn(t_index) is False:
-            return CONN_ERR   
+            return CONN_ERR
         currForce = self.cb.twofg_get_force(t_index)
         return currForce
 
@@ -1243,7 +1243,7 @@ class TWOFG():
         @rtype: float
         '''
         if self.isconn(t_index) is False:
-            return CONN_ERR   
+            return CONN_ERR
         fingerLength = self.cb.twofg_finger_length(t_index)
         return fingerLength
 
@@ -1256,7 +1256,7 @@ class TWOFG():
         @rtype: float
         '''
         if self.isconn(t_index) is False:
-            return CONN_ERR   
+            return CONN_ERR
         fingerHeight = self.cb.twofg_finger_length(t_index)
         return fingerHeight
 
@@ -1269,7 +1269,7 @@ class TWOFG():
         @rtype: int
         '''
         if self.isconn(t_index) is False:
-            return CONN_ERR   
+            return CONN_ERR
         fingerOrientation = self.cb.twofg_finger_orientation_outward(t_index)
         return fingerOrientation
 
@@ -1282,7 +1282,7 @@ class TWOFG():
         @rtype: float
         '''
         if self.isconn(t_index) is False:
-            return CONN_ERR   
+            return CONN_ERR
         fingertipOffset = self.cb.twofg_fingertip_offset(t_index)
         return fingertipOffset
 
@@ -1294,7 +1294,7 @@ class TWOFG():
         @type t_index: int
         '''
         if self.isconn(t_index) is False:
-            return CONN_ERR   
+            return CONN_ERR
         self.cb.twofg_stop(t_index)
 
 
@@ -1313,8 +1313,8 @@ class TWOFG():
         @param f_wait: wait for the grip to end or not?
         '''
         if self.isconn(t_index) is False:
-            return CONN_ERR   
-        
+            return CONN_ERR
+
         #Sanity check
         max = self.get_max_int_width(t_index)
         min = self.get_min_int_width(t_index)
@@ -1330,7 +1330,7 @@ class TWOFG():
             tp_popup("Invalid 2FG speed parameter, 10-100 is valid only", DR_PM_WARNING)
             return RET_FAIL
 
-        self.cb.twofg_grip_internal(t_index, float(t_width), int(n_force), int(p_speed))        
+        self.cb.twofg_grip_internal(t_index, float(t_width), int(n_force), int(p_speed))
 
         if f_wait:
             tim_cnt = 0
@@ -1358,7 +1358,7 @@ class TWOFG():
                 return RET_FAIL
             return RET_FAIL
         else:
-            return RET_OK  
+            return RET_OK
 
 
     def grip_ext(self, t_index, t_width, n_force, p_speed, f_wait):
@@ -1374,7 +1374,7 @@ class TWOFG():
         @type p_speed: int
         @type f_wait: bool
         @param f_wait: wait for the grip to end or not?
-        '''        
+        '''
         if self.isconn(t_index) is False:
             return CONN_ERR
 
@@ -1393,7 +1393,7 @@ class TWOFG():
             tp_popup("Invalid 2FG speed parameter, 10-100 is valid only", DR_PM_WARNING)
             return RET_FAIL
 
-        self.cb.twofg_grip_external(t_index, float(t_width), int(n_force), int(p_speed))        
+        self.cb.twofg_grip_external(t_index, float(t_width), int(n_force), int(p_speed))
 
         if f_wait:
             tim_cnt = 0
@@ -1421,7 +1421,7 @@ class TWOFG():
                 return RET_FAIL
             return RET_FAIL
         else:
-            return RET_OK  
+            return RET_OK
 
     def move(self, t_index, t_width, f_wait):
         '''
@@ -1442,7 +1442,7 @@ class TWOFG():
             tp_popup("Invalid 2FG diameter parameter, " + str(max)+" - "+str(min) +" is valid only", DR_PM_WARNING)
             return RET_FAIL
 
-        self.cb.twofg_grip_external(t_index, float(t_width), 100, 80)        
+        self.cb.twofg_grip_external(t_index, float(t_width), 100, 80)
 
         if f_wait:
             tim_cnt = 0
@@ -1458,7 +1458,7 @@ class TWOFG():
                 RET_OK
             return RET_FAIL
         else:
-            return RET_OK  
+            return RET_OK
 
 
     def set_finger_len(self, t_index, flen):
@@ -1475,7 +1475,7 @@ class TWOFG():
 
         if flen > 100 or flen < 0:
             tp_popup("Invalid 2FG finger length parameter, 0-100 is valid only", DR_PM_WARNING)
-            return RET_FAIL 
+            return RET_FAIL
 
         self.cb.twofg_set_finger_length(t_index, float(flen))
 
@@ -1494,7 +1494,7 @@ class TWOFG():
 
         if fh > 100 or fh < 0:
             tp_popup("Invalid 2FG finger height parameter, 0-100 is valid only", DR_PM_WARNING)
-            return RET_FAIL 
+            return RET_FAIL
 
         self.cb.twofg_set_finger_height(t_index, float(fh))
 
@@ -1506,13 +1506,13 @@ class TWOFG():
         @type t_index: int
         @param foffs: Fingertip offset in mm
         @type   foffs: float
-        '''  
+        '''
         if self.isconn(t_index) is False:
             return CONN_ERR
 
         if foffs > 100 or foffs < 0:
             tp_popup("Invalid 2FG fingertip offset parameter, 0-100 is valid only", DR_PM_WARNING)
-            return RET_FAIL 
+            return RET_FAIL
 
         self.cb.twofg_set_fingertip_offset(t_index, float(foffs))
 
@@ -1564,13 +1564,13 @@ class FGP():
 
         @param t_index: The position of the device (0 for single, 1 for dual primary, 2 for dual secondary)
         @type t_index: int
-        
+
         @rtype: bool
         @return: True if busy, False otherwise
         '''
         if self.isconn(t_index) is False:
             return CONN_ERR
-        return self.cb.fgp_get_busy(t_index) 
+        return self.cb.fgp_get_busy(t_index)
 
     def isGripped(self, t_index):
         '''
@@ -1578,7 +1578,7 @@ class FGP():
 
         @param t_index: The position of the device (0 for single, 1 for dual primary, 2 for dual secondary)
         @type t_index: int
-        
+
         @rtype: bool
         @return: True if gripped, False otherwise
         '''
@@ -1592,12 +1592,12 @@ class FGP():
 
         @param t_index: The position of the device (0 for single, 1 for dual primary, 2 for dual secondary)
         @type t_index: int
-        
+
         @rtype: int
         @return: Status code of the device
         '''
         if self.isconn(t_index) is False:
-            return CONN_ERR   
+            return CONN_ERR
         status = self.cb.fgp_get_status(t_index)
         return status
 
@@ -1608,9 +1608,9 @@ class FGP():
         @param t_index: The position of the device (0 for single, 1 for dual primary, 2 for dual secondary)
         @return: External width in mm
         @rtype: float
-        '''       
+        '''
         if self.isconn(t_index) is False:
-            return CONN_ERR   
+            return CONN_ERR
         width = self.cb.fgp_get_external_width(t_index)
         return round(width, 2)
 
@@ -1621,9 +1621,9 @@ class FGP():
         @param t_index: The position of the device (0 for single, 1 for dual primary, 2 for dual secondary)
         @return: Minimum internal width in mm
         @rtype: float
-        '''        
+        '''
         if self.isconn(t_index) is False:
-            return CONN_ERR   
+            return CONN_ERR
         minWidth = self.cb.twofg_get_min_external_width(t_index)
         return minWidth
 
@@ -1636,7 +1636,7 @@ class FGP():
         @rtype: float
         '''
         if self.isconn(t_index) is False:
-            return CONN_ERR   
+            return CONN_ERR
         extMaxWidth = self.cb.twofg_get_max_external_width(t_index)
         return extMaxWidth
 
@@ -1647,9 +1647,9 @@ class FGP():
         @param t_index: The position of the device (0 for single, 1 for dual primary, 2 for dual secondary)
         @return: Force in N
         @rtype: float
-        '''        
+        '''
         if self.isconn(t_index) is False:
-            return CONN_ERR   
+            return CONN_ERR
         currForce = self.cb.fgp_get_force(t_index)
         return currForce
 
@@ -1664,10 +1664,10 @@ class FGP():
         @rtype: float
         '''
         if self.isconn(t_index) is False:
-            return CONN_ERR   
+            return CONN_ERR
 
         if (p_finger == 1):
-            fingerLength = self.cb.fgp_get_fixed_finger_length(t_index)    
+            fingerLength = self.cb.fgp_get_fixed_finger_length(t_index)
         elif (p_finger == 2):
             fingerLength = self.cb.fgp_get_moving_finger_length(t_index)
         else:
@@ -1690,7 +1690,7 @@ class FGP():
             return CONN_ERR
 
         if (p_finger == 1):
-            fingerHeight = self.cb.fgp_get_fixed_finger_height(t_index)    
+            fingerHeight = self.cb.fgp_get_fixed_finger_height(t_index)
         elif (p_finger == 2):
             fingerHeight = self.cb.fgp_get_moving_finger_height(t_index)
         else:
@@ -1713,7 +1713,7 @@ class FGP():
             return CONN_ERR
 
         if (p_finger == 1):
-            f_offs = self.cb.fgp_get_fixed_fingertip_offset(t_index)    
+            f_offs = self.cb.fgp_get_fixed_fingertip_offset(t_index)
         elif (p_finger == 2):
             f_offs = self.cb.fgp_get_moving_fingertip_offset(t_index)
         else:
@@ -1730,7 +1730,7 @@ class FGP():
         @type t_index: int
         '''
         if self.isconn(t_index) is False:
-            return CONN_ERR   
+            return CONN_ERR
         self.cb.fgp_fg_stop(t_index)
 
     def set_finger_len(self, t_index, p_finger, flen):
@@ -1749,10 +1749,10 @@ class FGP():
 
         if flen > 1000 or flen < -300:
             tp_popup("Invalid FGP finger length parameter, -300-1000 is valid only", DR_PM_WARNING)
-            return RET_FAIL 
+            return RET_FAIL
 
         if (p_finger == 1):
-            self.cb.fgp_set_fixed_finger_length(t_index, float(flen))    
+            self.cb.fgp_set_fixed_finger_length(t_index, float(flen))
         elif (p_finger == 2):
             self.cb.fgp_set_moving_finger_length(t_index, float(flen))
         else:
@@ -1776,10 +1776,10 @@ class FGP():
 
         if fheight > 1000 or fheight < 0:
             tp_popup("Invalid FGP finger height parameter, 0-1000 is valid only", DR_PM_WARNING)
-            return RET_FAIL 
+            return RET_FAIL
 
         if (p_finger == 1):
-            self.cb.fgp_set_fixed_finger_height(t_index, float(fheight))    
+            self.cb.fgp_set_fixed_finger_height(t_index, float(fheight))
         elif (p_finger == 2):
             self.cb.fgp_set_moving_finger_height(t_index, float(fheight))
         else:
@@ -1802,10 +1802,10 @@ class FGP():
 
         if foffs > 100 or foffs < 1:
             tp_popup("Invalid FGP fingertip offset parameter, 1-100 is valid only", DR_PM_WARNING)
-            return RET_FAIL 
+            return RET_FAIL
 
         if (p_finger == 1):
-            self.cb.fgp_set_fixed_fingertip_offset(t_index, float(foffs))    
+            self.cb.fgp_set_fixed_fingertip_offset(t_index, float(foffs))
         elif (p_finger == 2):
             self.cb.fgp_set_moving_fingertip_offset(t_index, float(foffs))
         else:
@@ -1830,7 +1830,7 @@ class FGP():
 
     def set_vac_offset(self, t_index, vac_offs):
         '''
-        Sets the vacuum cup offset. Distance from the vacuum cup plane to the body of the gripper. 
+        Sets the vacuum cup offset. Distance from the vacuum cup plane to the body of the gripper.
 
         @param t_index: The position of the device (0 for single, 1 for dual primary, 2 for dual secondary)
         @type t_index: int
@@ -1839,10 +1839,10 @@ class FGP():
         '''
         if self.isconn(t_index) is False:
             return CONN_ERR
-        
+
         if vac_offs > 100 or vac_offs < 0:
             tp_popup("Invalid FGP vacuum offset parameter, -1000-1000 is valid only", DR_PM_WARNING)
-            return RET_FAIL 
+            return RET_FAIL
 
         self.cb.fgp_set_vg_vacuum_cups_offset(int(t_index), float(vac_offs))
 
@@ -1853,7 +1853,7 @@ class FGP():
 
         @param t_index: The position of the device (0 for single, 1 for dual primary, 2 for dual secondary)
         @type t_index: int
-        @return: Vacuum cup offset in mm 
+        @return: Vacuum cup offset in mm
         @rtype: float
         '''
         if self.isconn(t_index) is False:
@@ -1876,7 +1876,7 @@ class FGP():
 
 
         v_stat = self.cb.fgp_get_vg_grip_status(t_index)
-        
+
         if (v_stat == 1):
             return True
         else:
@@ -1916,7 +1916,7 @@ class FGP():
         @type p_speed: int
         @type f_wait: bool
         @param f_wait: wait for the grip to end or not?
-        '''        
+        '''
         if self.isconn(t_index) is False:
             return CONN_ERR
 
@@ -1935,7 +1935,7 @@ class FGP():
             tp_popup("Invalid FGP speed parameter, 10-100 is valid only", DR_PM_WARNING)
             return RET_FAIL
 
-        self.cb.fgp_grip_external(t_index, float(t_width), int(n_force), int(p_speed))        
+        self.cb.fgp_grip_external(t_index, float(t_width), int(n_force), int(p_speed))
 
         if f_wait:
             tim_cnt = 0
@@ -1963,7 +1963,7 @@ class FGP():
                 return RET_FAIL
             return RET_FAIL
         else:
-            return RET_OK  
+            return RET_OK
 
 
     def release(self, t_index, t_width, p_speed, f_wait):
@@ -1992,7 +1992,7 @@ class FGP():
             return RET_FAIL
 
 
-        self.cb.fgp_grip_external(t_index, float(t_width), int(80), int(p_speed))        
+        self.cb.fgp_grip_external(t_index, float(t_width), int(80), int(p_speed))
 
         if f_wait:
             tim_cnt = 0
@@ -2008,7 +2008,7 @@ class FGP():
                 RET_OK
             return RET_FAIL
         else:
-            return RET_OK  
+            return RET_OK
 
     def vacuum_grip(self, t_index, t_vac, f_wait):
         '''
@@ -2019,7 +2019,7 @@ class FGP():
         @type t_vac: int
         @type f_wait: bool
         @param f_wait: wait for the grip to end or not?
-        '''        
+        '''
         if self.isconn(t_index) is False:
             return CONN_ERR
 
@@ -2029,7 +2029,7 @@ class FGP():
             return RET_FAIL
 
         #True is the required flag that is still there but not used
-        self.cb.fgp_vg_grip(t_index, True, int(t_vac))        
+        self.cb.fgp_vg_grip(t_index, True, int(t_vac))
 
         if f_wait:
             tim_cnt = 0
@@ -2057,7 +2057,7 @@ class FGP():
                 return RET_FAIL
             return RET_FAIL
         else:
-            return RET_OK  
+            return RET_OK
 
     def vacuum_release(self, t_index, f_wait):
         '''
@@ -2070,7 +2070,7 @@ class FGP():
         if self.isconn(t_index) is False:
             return CONN_ERR
 
-        self.cb.fgp_vg_release(t_index)        
+        self.cb.fgp_vg_release(t_index)
 
         if f_wait:
             tim_cnt = 0
@@ -2086,7 +2086,7 @@ class FGP():
                 RET_OK
             return RET_FAIL
         else:
-            return RET_OK  
+            return RET_OK
 
 class SG(Device):
     '''
@@ -2128,7 +2128,7 @@ class SG(Device):
 
         @param t_index: The position of the device (0 for single, 1 for dual primary, 2 for dual secondary)
         @type t_index: int
-        
+
         @rtype: bool
         @return: True if busy, False otherwise
         '''
@@ -2146,7 +2146,7 @@ class SG(Device):
         @param t_index: The position of the device (0 for single, 1 for dual primary, 2 for dual secondary)
         @type t_index: int
         @param tool_id: Tool id to be initalized with (1,2,3)
-        @type tool_id: int 
+        @type tool_id: int
         '''
         if self.isconn(t_index) is False:
             return CONN_ERR
@@ -2163,7 +2163,7 @@ class SG(Device):
             if tim_cnt > 40:
                 tp_popup("Soft gripper init command timeout", DR_PM_WARNING)
                 break
-        else:    
+        else:
             if res != 0:
                 tp_popup("Failed to initialize Soft Gripper", DR_PM_WARNING)
                 return RET_FAIL
@@ -2172,7 +2172,7 @@ class SG(Device):
                 return RET_OK
 
         return RET_FAIL
-    
+
     def halt(self, t_index):
         '''
         Stop the grippers movement
@@ -2184,7 +2184,7 @@ class SG(Device):
             return CONN_ERR
 
         self.cb.sg_stop(t_index)
-        
+
     def home(self, t_index):
         '''
         Sends the gripper to it's home position
@@ -2200,7 +2200,7 @@ class SG(Device):
             return RET_FAIL
 
         self.cb.sg_home(t_index)
-    
+
     def get_max_depth(self, t_index):
         '''
         Returns with current maximum depth
@@ -2208,7 +2208,7 @@ class SG(Device):
         @param t_index: The position of the device (0 for single, 1 for dual primary, 2 for dual secondary)
         @return: Maximum depth in mm
         @rtype: float
-        ''' 
+        '''
         if self.isconn(t_index) is False:
             return CONN_ERR
 
@@ -2226,7 +2226,7 @@ class SG(Device):
         @param t_index: The position of the device (0 for single, 1 for dual primary, 2 for dual secondary)
         @return: Width in mm
         @rtype: float
-        ''' 
+        '''
         if self.isconn(t_index) is False:
             return CONN_ERR
 
@@ -2235,7 +2235,7 @@ class SG(Device):
             tp_popup("Soft Gripper is not initalized! Initialize first!", DR_PM_WARNING)
             return RET_FAIL
 
-        return self.cb.sg_get_width(t_index)    
+        return self.cb.sg_get_width(t_index)
 
     def get_depth(self, t_index):
         '''
@@ -2244,7 +2244,7 @@ class SG(Device):
         @param t_index: The position of the device (0 for single, 1 for dual primary, 2 for dual secondary)
         @return: Depth in mm
         @rtype: float
-        ''' 
+        '''
         if self.isconn(t_index) is False:
             return CONN_ERR
 
@@ -2273,7 +2273,7 @@ class SG(Device):
         @param t_index: The position of the device (0 for single, 1 for dual primary, 2 for dual secondary)
         @return: Maximum width in mm
         @rtype: float
-        ''' 
+        '''
         limits = self.get_min_max(t_index)
         if limits == RET_FAIL:
             return RET_FAIL
@@ -2287,7 +2287,7 @@ class SG(Device):
         @param t_index: The position of the device (0 for single, 1 for dual primary, 2 for dual secondary)
         @return: Minimum width in mm
         @rtype: float
-        ''' 
+        '''
         limits = self.get_min_max(t_index)
         if limits == RET_FAIL:
             return RET_FAIL
@@ -2296,7 +2296,7 @@ class SG(Device):
 
     def grip(self, t_index, t_width, f_wait):
         '''
-        Starts a normal grip command 
+        Starts a normal grip command
 
         @param t_index: The position of the device (0 for single, 1 for dual primary, 2 for dual secondary)
         @param t_width: The diameter to move the gripper to in mm's
@@ -2315,7 +2315,7 @@ class SG(Device):
         #Sanity check
         limits = self.get_min_max(t_index)
         max_w = limits["max_open"]
-        min_w = limits["min_open"] 
+        min_w = limits["min_open"]
 
         if ((t_width > max_w) or (t_width < min_w)):
             tp_popup("Invalid parameter for Soft Gripper width, valid range is: "+ str(min_w) +" - " + str(max_w), DR_PM_WARNING)
@@ -2343,7 +2343,7 @@ class SG(Device):
 
     def gentle_grip(self, t_index, t_width, f_wait):
         '''
-        Starts a gentle grip command 
+        Starts a gentle grip command
 
         @param t_index: The position of the device (0 for single, 1 for dual primary, 2 for dual secondary)
         @param t_width: The diameter to move the gripper to in mm's
@@ -2362,7 +2362,7 @@ class SG(Device):
         #Sanity check
         limits = self.get_min_max(t_index)
         max_w = limits["max_open"]
-        min_w = limits["min_open"] 
+        min_w = limits["min_open"]
 
         if ((t_width > max_w) or (t_width < min_w)):
             tp_popup("Invalid parameter for Soft Gripper width, valid range is: "+ str(min_w) +" - " + str(max_w), DR_PM_WARNING)
@@ -2404,7 +2404,7 @@ class MG():
         @param t_index: The position of the device (0 for single, 1 for dual primary, 2 for dual secondary)
         @return: True if connected, False otherwise
         @rtype: bool
-        '''        
+        '''
         IsMG = self.cb.cb_is_device_connected(t_index, MG_ID)
         if IsMG is False:
             tp_popup("No MG device connected on the given instance", DR_PM_WARNING)
@@ -2418,12 +2418,12 @@ class MG():
 
         @param t_index: The position of the device (0 for single, 1 for dual primary, 2 for dual secondary)
         @type t_index: int
-        
+
         @rtype: bool
         @return: True if busy, False otherwise
         '''
         if self.isconn(t_index) is False:
-            return CONN_ERR 
+            return CONN_ERR
         busyFlag = self.cb.mg_get_busy(t_index)
         return busyFlag
 
@@ -2433,12 +2433,12 @@ class MG():
 
         @param t_index: The position of the device (0 for single, 1 for dual primary, 2 for dual secondary)
         @type t_index: int
-        
+
         @rtype: bool
         @return: True if workpiece is detected, False otherwise
         '''
         if self.isconn(t_index) is False:
-            return CONN_ERR 
+            return CONN_ERR
         nearFlag = self.cb.mg_part_near(t_index)
         return nearFlag
 
@@ -2448,12 +2448,12 @@ class MG():
 
         @param t_index: The position of the device (0 for single, 1 for dual primary, 2 for dual secondary)
         @type t_index: int
-        
+
         @rtype: bool
         @return: True if smart grip is available, False otherwise
         '''
         if self.isconn(t_index) is False:
-            return CONN_ERR 
+            return CONN_ERR
         isSmartAvail = self.cb.mg_smart_grip_available(t_index)
         return isSmartAvail
 
@@ -2463,7 +2463,7 @@ class MG():
 
         @param t_index: The position of the device (0 for single, 1 for dual primary, 2 for dual secondary)
         @type t_index: int
-        
+
         @rtype: bool
         @return: True if a workpiece was dropped, False otherwise
         '''
@@ -2478,12 +2478,12 @@ class MG():
 
         @param t_index: The position of the device (0 for single, 1 for dual primary, 2 for dual secondary)
         @type t_index: int
-        
+
         @rtype: bool
         @return: True if strength is NOT, False is strength IS reached
         '''
         if self.isconn(t_index) is False:
-            return CONN_ERR 
+            return CONN_ERR
         StrNotReached = self.cb.mg_get_magnet_strength_not_reached(t_index)
         return StrNotReached
 
@@ -2493,31 +2493,31 @@ class MG():
 
         @param t_index: The position of the device (0 for single, 1 for dual primary, 2 for dual secondary)
         @type t_index: int
-        
+
         @rtype: int
         @return: The current finger type
         '''
         if self.isconn(t_index) is False:
-            return CONN_ERR 
+            return CONN_ERR
         allVar = self.cb.mg_get_all_variables(t_index)
         if len(allVar) > 1:
             fingerType = allVar["finger_type"]
             return fingerType
-        else: 
+        else:
             return RET_FAIL
-        
+
     def get_finger_height(self, t_index):
         '''
         Gets the current finger height
 
         @param t_index: The position of the device (0 for single, 1 for dual primary, 2 for dual secondary)
         @type t_index: int
-        
+
         @rtype: float
         @return: The finger height in mm
         '''
         if self.isconn(t_index) is False:
-            return CONN_ERR 
+            return CONN_ERR
         fingerHeight = self.cb.mg_get_finger_height_mm(t_index)
         return fingerHeight
 
@@ -2527,7 +2527,7 @@ class MG():
 
         @param t_index: The position of the device (0 for single, 1 for dual primary, 2 for dual secondary)
         @type t_index: int
-        
+
         @rtype: int
         @return: Reached magnetic strength in %
         '''
@@ -2542,12 +2542,12 @@ class MG():
 
         @param t_index: The position of the device (0 for single, 1 for dual primary, 2 for dual secondary)
         @type t_index: int
-        
+
         @rtype: int
         @return: Error code of the device, 0 means no error
         '''
         if self.isconn(t_index) is False:
-            return CONN_ERR 
+            return CONN_ERR
         currError = self.cb.mg_get_error_code(t_index)
         return currError
 
@@ -2555,11 +2555,11 @@ class MG():
         '''
         Starts the auto calibration process of the magnetic gripper\n
         Could take up to 3 minutes\n
-        No workpiece should be in a 9mm vicinity! 
+        No workpiece should be in a 9mm vicinity!
 
         @param t_index: The position of the device (0 for single, 1 for dual primary, 2 for dual secondary)
         @type t_index: int
-        
+
         @rtype: bool
         @return: True if calibration was succesfull, False otherwise
         '''
@@ -2570,7 +2570,7 @@ class MG():
         self.release(t_index, True)
 
         self.cb.mg_auto_calibrate(t_index)
-        
+
         tim_cnt = 0
         fbusy = self.isBusy(t_index)
         while (fbusy):
@@ -2627,7 +2627,7 @@ class MG():
 
     def grip(self, t_index, strength, f_wait):
         '''
-        Starts a normal grip command 
+        Starts a normal grip command
 
         @param t_index: The position of the device (0 for single, 1 for dual primary, 2 for dual secondary)
         @param strength: The desired magnetic strength in % (1-100)
@@ -2665,7 +2665,7 @@ class MG():
     def smart_grip(self, t_index, strength, f_wait):
         '''
         Starts a smart grip command
-        Smart grip checks for workpiece presence before activating magnets 
+        Smart grip checks for workpiece presence before activating magnets
 
         @param t_index: The position of the device (0 for single, 1 for dual primary, 2 for dual secondary)
         @param strength: The desired magnetic strength in % (1-100)
@@ -2678,7 +2678,7 @@ class MG():
         if self.isSmatAvailable(t_index) is False:
             tp_popup("Smart grip is unavailable on the chosen device", DR_PM_WARNING)
             return RET_FAIL
-        
+
         self.cb.mg_grip(t_index, int(strength), True)
 
         if f_wait:
@@ -2704,7 +2704,7 @@ class MG():
 
     def release(self, t_index, f_wait):
         '''
-        Starts a release command, magnetic strength will be zero 
+        Starts a release command, magnetic strength will be zero
 
         @param t_index: The position of the device (0 for single, 1 for dual primary, 2 for dual secondary)
         @type f_wait: bool
@@ -2714,7 +2714,7 @@ class MG():
             return CONN_ERR
 
         self.cb.mg_release(t_index)
-       
+
         if f_wait:
             tim_cnt = 0
             fbusy = self.isBusy(t_index)
@@ -2731,7 +2731,7 @@ class MG():
                     return RET_FAIL
                 else:
                     return RET_OK
-            
+
             return RET_FAIL
         else:
             return RET_OK
@@ -2790,9 +2790,9 @@ class SDR():
         @rtype: bool
         '''
         if self.isconn() is False:
-            return CONN_ERR 
+            return CONN_ERR
 
-        return self.cb.sdr_get_motor_running(0)    
+        return self.cb.sdr_get_motor_running(0)
 
     def isRampingUp(self):
         '''
@@ -2802,7 +2802,7 @@ class SDR():
         @rtype: bool
         '''
         if self.isconn() is False:
-            return CONN_ERR 
+            return CONN_ERR
 
         return self.cb.sdr_get_motor_ramping_up(0)
 
@@ -2814,7 +2814,7 @@ class SDR():
         @rtype: bool
         '''
         if self.isconn() is False:
-            return CONN_ERR 
+            return CONN_ERR
 
         return self.cb.sdr_get_motor_ramping_down(0)
 
@@ -2826,7 +2826,7 @@ class SDR():
         @rtype: bool
         '''
         if self.isconn() is False:
-            return CONN_ERR 
+            return CONN_ERR
 
         return self.cb.sdr_get_motor_stopped(0)
 
@@ -2838,7 +2838,7 @@ class SDR():
         @rtype: bool
         '''
         if self.isconn() is False:
-            return CONN_ERR 
+            return CONN_ERR
 
         return self.cb.sdr_get_button_pressed(0)
 
@@ -2850,7 +2850,7 @@ class SDR():
         @rtype: float
         '''
         if self.isconn() is False:
-            return CONN_ERR 
+            return CONN_ERR
 
         return self.cb.sdr_get_current_temp_c(0)
 
@@ -2862,7 +2862,7 @@ class SDR():
         @rtype: int
         '''
         if self.isconn() is False:
-            return CONN_ERR 
+            return CONN_ERR
 
         return self.cb.sdr_get_current_rpm(0)
 
@@ -2878,7 +2878,7 @@ class SDR():
         @param f_wait: wait for the command to end or not?
         '''
         if self.isconn() is False:
-            return CONN_ERR 
+            return CONN_ERR
 
         if setRPM < 0 or setRPM > 10000:
             tp_popup("Invalid parameter for Sander RPM, 0-10000 is the valid range", DR_PM_WARNING)
@@ -2901,7 +2901,7 @@ class SDR():
                         tp_popup("Sander start command timeout", DR_PM_WARNING)
                         break
                 else:
-                    #Motor is running 
+                    #Motor is running
                     #Wait for ramp up and ramp down to go clear (running in valid range)
                     tim_cnt = 0
                     r_up = self.isRampingUp()
@@ -2938,7 +2938,7 @@ class SDR():
                         break
                 else:
                     return RET_OK
-                #Motor stop timeout    
+                #Motor stop timeout
                 return RET_FAIL
 
 
@@ -2957,7 +2957,7 @@ class EYES():
 
         @return: True if connected, False otherwise
         @rtype: bool
-        '''        
+        '''
         conn = self.cb.eye_is_connected()
         if conn:
             return True
@@ -3021,9 +3021,9 @@ class EYES():
 
         if validate is True:
             if (retval == 0):
-                tp_popup("No workpiece found while running EYES task: " + str(task_id), DR_PM_WARNING) 
+                tp_popup("No workpiece found while running EYES task: " + str(task_id), DR_PM_WARNING)
             return retval
-        
+
         return retval
 
     def inspect(self, task_id, validate):
@@ -3059,12 +3059,12 @@ class EYES():
         obj_pos = self._dict_to_pose(pose_dict)
 
         return obj_pos
-        
+
     def get_next_wp(self, gripper_sel, model_type):
         '''
         Gets the next workpiece's position must be run after inspect or locate
 
-        @return: The position of the next workpiece that was found in robot coordinate system 
+        @return: The position of the next workpiece that was found in robot coordinate system
         @rtype: posx position
         '''
         return self.get_object(gripper_sel, model_type)
@@ -3107,11 +3107,11 @@ class EYES():
 
         return self.cb.eye_get_workpiece_type()
 
-    #Get the inspection result (0 invalid, 1 pass, 2 fail, -1 error) 
+    #Get the inspection result (0 invalid, 1 pass, 2 fail, -1 error)
     def get_insp_res(self):
         '''
         Returns with the result of the inspection task\n
-        0 means invalid\n 
+        0 means invalid\n
         1 means pass\n
         2 means fail\n
         -1 means error during inspection\n
@@ -3124,7 +3124,7 @@ class EYES():
 
         return self.cb.eye_get_workpiece_inspection_eval()
 
-    #Get the inspection match  (0-100%, -1 error) 
+    #Get the inspection match  (0-100%, -1 error)
     def get_insp_match(self):
         '''
         Returns with the match percentage of the inspecton\n
@@ -3149,7 +3149,7 @@ class EYES():
         @rtype: posx position
         '''
         if self.isconn() is False:
-            return CONN_ERR        
+            return CONN_ERR
 
         pose_struct = self._get_curr_pose_dict()
 
@@ -3164,10 +3164,10 @@ class EYES():
     #Save camera view pose into the EYES system
     def set_cam_pos(self):
         '''
-        Saves the current robot position in the camera 
+        Saves the current robot position in the camera
         '''
         if self.isconn() is False:
-            return CONN_ERR            
+            return CONN_ERR
 
         pose_struct = self._get_curr_pose_dict()
 
@@ -3187,10 +3187,10 @@ class EYES():
 
         @param t_ID: Task ID of the EYES system where the position was saved
         @rtype: posx position
-        @return: Camera view position in robot coordinate system  
+        @return: Camera view position in robot coordinate system
         '''
         if self.isconn() is False:
-            return CONN_ERR 
+            return CONN_ERR
 
         pose_dict = self.cb.eye_get_cameraview_pose(t_ID, EYES_DOOSAN_ID)
 
@@ -3259,7 +3259,7 @@ class VGP():
         @return: True if PSU error, False otherwise
         @rtype: bool
         '''
-    
+
         if self.isconn(t_index) is False:
             return CONN_ERR
 
@@ -3271,7 +3271,7 @@ class VGP():
 
         @param t_index: The position of the device (0 for single, 1 for dual primary, 2 for dual secondary)
         @type t_index: int
-        
+
         @rtype: bool
         @return: True if busy, False otherwise
         '''
@@ -3287,13 +3287,13 @@ class VGP():
 
         @param t_index: The position of the device (0 for single, 1 for dual primary, 2 for dual secondary)
         @type t_index: int
-        
+
         @rtype: int
         @return: Vacuum percentage
         '''
         if self.isconn(t_index) is False:
             return CONN_ERR
-            
+
         if chID == self.A_CH:
             return self.cb.vgp_get_vacuum_a_percent(t_index)
         elif chID == self.B_CH:
@@ -3313,7 +3313,7 @@ class VGP():
 
         @param t_index: The position of the device (0 for single, 1 for dual primary, 2 for dual secondary)
         @type t_index: int
-        
+
         @rtype: int
         @return: Release status\n
         0 means not released
@@ -3322,7 +3322,7 @@ class VGP():
         '''
         if self.isconn(t_index) is False:
             return CONN_ERR
-            
+
         if chID == self.A_CH:
             return self.cb.vgp_get_release_status_a(t_index)
         elif chID == self.B_CH:
@@ -3342,7 +3342,7 @@ class VGP():
 
         @param t_index: The position of the device (0 for single, 1 for dual primary, 2 for dual secondary)
         @type t_index: int
-        
+
         @rtype: int
         @return: Release status\n
         0 means not gripped
@@ -3352,7 +3352,7 @@ class VGP():
         '''
         if self.isconn(t_index) is False:
             return CONN_ERR
-            
+
         if chID == self.A_CH:
             return self.cb.vgp_get_grip_status_a(t_index)
         elif chID == self.B_CH:
@@ -3421,8 +3421,8 @@ class VGP():
         else:
             for ch in enach:
                 self.enabled_channels[t_index] |= ch
-       
-        return RET_OK        
+
+        return RET_OK
 
     #Grip with the previously defined params
     def grip(self, t_index, vac, f_wait):
@@ -3465,7 +3465,7 @@ class VGP():
                 return RET_OK
 
             #Grip timeout
-            return RET_FAIL 
+            return RET_FAIL
 
     #Channels list can be arbitrary so it needs to be the last param
     #Can be called with arbitrary channels
@@ -3500,7 +3500,7 @@ class VGP():
             rel_channels = channels[0]
         else:
             for ch in channels:
-                rel_channels |= ch     
+                rel_channels |= ch
 
         self.cb.vgp_release(t_index, int(rel_channels))
 
@@ -3518,7 +3518,7 @@ class VGP():
                 return RET_OK
 
             #Release timeout
-            return RET_FAIL 
+            return RET_FAIL
 
 
 class HEX():
@@ -3543,7 +3543,7 @@ class HEX():
             tp_popup("No HEX sensor connected to the system", DR_PM_WARNING)
             return False
         else:
-            return True   
+            return True
 
     def IsHEXv2(self):
         '''
@@ -3582,7 +3582,7 @@ class HEX():
             return CONN_ERR
 
         #Init result dictionary
-        force_dict = dict.fromkeys(['Fx', 'Fy', 'Fz', 'Tx', 'Ty', 'Tz'])    
+        force_dict = dict.fromkeys(['Fx', 'Fy', 'Fz', 'Tx', 'Ty', 'Tz'])
 
         res = self.cb.hex_get_all_variables()
 
@@ -3614,7 +3614,7 @@ class HEX():
         Applies an offset that zeroes the sensor data
         '''
         if self.isconn() is False:
-            return CONN_ERR        
+            return CONN_ERR
 
         return self.cb.ft_bias(True)
 
@@ -3623,7 +3623,7 @@ class HEX():
         Removes any offset that was applied before
         '''
         if self.isconn() is False:
-            return CONN_ERR        
+            return CONN_ERR
 
         return self.cb.ft_bias(False)
 
@@ -3680,7 +3680,7 @@ class RG2FT():
         force_dict['Ty'] = all_var['left_hex'][4]
         force_dict['Tz'] = all_var['left_hex'][5]
 
-        return force_dict    
+        return force_dict
 
     def get_right_hex(self):
         '''
@@ -3705,8 +3705,8 @@ class RG2FT():
         force_dict['Ty'] = all_var['right_hex'][4]
         force_dict['Tz'] = all_var['right_hex'][5]
 
-        return force_dict    
-    
+        return force_dict
+
     def get_left_proxi(self):
         '''
         Returns with the left proximity sensor value
@@ -3766,7 +3766,7 @@ class RG2FT():
     def isBusy(self):
         '''
         Gets if the gripper is busy or not
-        
+
         @rtype: bool
         @return: True if busy, False otherwise
         '''
@@ -3780,7 +3780,7 @@ class RG2FT():
     def isGripped(self):
         '''
         Gets if the gripper is gripping or not
-        
+
         @rtype: bool
         @return: True if part gripped, False otherwise
         '''
@@ -3794,7 +3794,7 @@ class RG2FT():
     def set_prox_offset(self, lprox, rprox):
         '''
         Apply the given offsets to the proximity sensor values
-        
+
         @param lprox: Left proximity offet
         @param rprox: Right proximity offet
         @type lprox: int
@@ -3940,7 +3940,7 @@ class RG2FT():
                 return RET_OK
             return RET_FAIL
         else:
-            return RET_OK   
+            return RET_OK
 
 class SD():
     '''
@@ -3966,7 +3966,7 @@ class SD():
             tp_popup("No Screw driver connected", DR_PM_WARNING)
             return False
         else:
-            return True 
+            return True
 
     def setErrhON(self, t_index):
         '''
@@ -4019,7 +4019,7 @@ class SD():
                 tp_popup("Screw driver saftey circuit triggered", DR_PM_ALARM)
             if err_code & 0x08 != 0:
                 tp_popup("Screw driver not calibrated", DR_PM_ALARM)
-            
+
             init_err = err_code & init_err_mask
 
             #Check init errors
@@ -4032,11 +4032,11 @@ class SD():
             elif init_err == 0x40:
                 tp_popup("Screw driver init error: Invalid shank index placement", DR_PM_ALARM)
             elif init_err == 0x50:
-                tp_popup("Screw driver init error: No torque index mark found", DR_PM_ALARM)            
+                tp_popup("Screw driver init error: No torque index mark found", DR_PM_ALARM)
             elif init_err == 0x60:
                 tp_popup("Screw driver init error: Torque difference overflow", DR_PM_ALARM)
             elif init_err == 0x70:
-                tp_popup("Screw driver init error: Index mark value has changed (clean encoder disk)", DR_PM_ALARM)            
+                tp_popup("Screw driver init error: Index mark value has changed (clean encoder disk)", DR_PM_ALARM)
 
             if err_code & 0x100:
                 tp_popup("Wrong Quick changer type for the Screw driver", DR_PM_ALARM)
@@ -4067,7 +4067,7 @@ class SD():
                 cmd_res_msg = "Shank obstructed during move"
             else:
                 cmd_res_msg = "Unknown command result"
-                
+
             tp_popup("Screwdriver command result: " + cmd_res_msg, DR_PM_ALARM)
         else:
             retval = False
@@ -4085,7 +4085,7 @@ class SD():
         @return: True if busy, False otherwise
         '''
         if self.isconn(t_index) is False:
-            return CONN_ERR    
+            return CONN_ERR
 
         shank_busy = self.cb.sd_get_shank_busy(t_index)
         dev_busy = self.cb.sd_get_screwdriver_busy(t_index)
@@ -4107,7 +4107,7 @@ class SD():
         if self.isconn(t_index) is False:
             return CONN_ERR
 
-        return self.cb.sd_get_torque_gradient(t_index)    
+        return self.cb.sd_get_torque_gradient(t_index)
 
     def get_shank_pos(self, t_index):
         '''
@@ -4121,7 +4121,7 @@ class SD():
         if self.isconn(t_index) is False:
             return CONN_ERR
 
-        return self.cb.sd_get_shank_position(t_index) 
+        return self.cb.sd_get_shank_position(t_index)
 
     def get_force(self, t_index):
         '''
@@ -4135,7 +4135,7 @@ class SD():
         if self.isconn(t_index) is False:
             return CONN_ERR
 
-        return self.cb.sd_get_force(t_index) 
+        return self.cb.sd_get_force(t_index)
 
     def get_ach_torq(self, t_index):
         '''
@@ -4149,7 +4149,7 @@ class SD():
         if self.isconn(t_index) is False:
             return CONN_ERR
 
-        return self.cb.sd_get_achieved_torque(t_index) 
+        return self.cb.sd_get_achieved_torque(t_index)
 
     def get_curr_torq(self, t_index):
         '''
@@ -4182,7 +4182,7 @@ class SD():
         '''
 
         if self.isconn(t_index) is False:
-            return CONN_ERR    
+            return CONN_ERR
 
         #Sanity check
         if force < 18 or force > 30:
@@ -4213,7 +4213,7 @@ class SD():
                     break
             else:
                 timeout = False
-            
+
         #Check for error
         if self.err_h[t_index]:
             err_state = self._err_handler(t_index)
@@ -4244,7 +4244,7 @@ class SD():
         '''
 
         if self.isconn(t_index) is False:
-            return CONN_ERR    
+            return CONN_ERR
 
         #Sanity check
         if force < 18 or force > 30:
@@ -4271,7 +4271,7 @@ class SD():
                     break
             else:
                 timeout = False
-            
+
         #Check for error
         if self.err_h[t_index]:
             err_state = self._err_handler(t_index)
@@ -4285,7 +4285,7 @@ class SD():
             if timeout:
                 return RET_FAIL
             else:
-                return RET_OK        
+                return RET_OK
 
     def pickup_screw(self, t_index, zforce, screw_len, f_wait):
         '''
@@ -4326,7 +4326,7 @@ class SD():
                     break
             else:
                 timeout = False
-            
+
         #Check for error
         if self.err_h[t_index]:
             err_state = self._err_handler(t_index)
@@ -4340,7 +4340,7 @@ class SD():
             if timeout:
                 return RET_FAIL
             else:
-                return RET_OK        
+                return RET_OK
 
     def move_shank(self, t_index, shank_pos, f_wait):
         '''
@@ -4352,10 +4352,10 @@ class SD():
         @type shank_pos: int
         @param f_wait: Wait for command to finish or not?
         @type f_wait: bool
-        '''    
+        '''
 
         if self.isconn(t_index) is False:
-            return CONN_ERR    
+            return CONN_ERR
 
         #Sanity check
         if shank_pos < 0 or shank_pos > 55:
@@ -4378,7 +4378,7 @@ class SD():
                     break
             else:
                 timeout = False
-            
+
         #Check for error
         if self.err_h[t_index]:
             err_state = self._err_handler(t_index)
@@ -4400,7 +4400,7 @@ class SD():
         Stops the Screw driver
 
         @param t_index: The position of the device (0 for single, 1 for dual primary, 2 for dual secondary)
-        @type t_index: int 
+        @type t_index: int
         '''
 
         self.cb.sd_stop(t_index)
@@ -4415,7 +4415,7 @@ class SD():
         '''
         if self.isconn(t_index) is False:
             return CONN_ERR
-        self.cb.cb_reset_tool_power()  
+        self.cb.cb_reset_tool_power()
 
 
 class LIFT():
@@ -4437,7 +4437,7 @@ class LIFT():
             tp_popup("No LIFT connected", DR_PM_WARNING)
             return False
         else:
-            return True 
+            return True
 
     def _get_err_register(self):
         '''
@@ -4447,7 +4447,7 @@ class LIFT():
         @return: Current error register value
         '''
         if self.isconn() is False:
-            return CONN_ERR 
+            return CONN_ERR
         lift_error = self.cb.lift_get_error()
 
         return lift_error
@@ -4460,7 +4460,7 @@ class LIFT():
         @return: True if busy, False otherwise
         '''
         if self.isconn() is False:
-            return CONN_ERR 
+            return CONN_ERR
         busyFlag = self.cb.lift_get_busy()
         return busyFlag
 
@@ -4473,10 +4473,10 @@ class LIFT():
         @return: Current position of the lift in mm
         '''
         if self.isconn() is False:
-            return CONN_ERR 
+            return CONN_ERR
         liftpos = self.cb.lift_get_position()
         return liftpos
-    
+
     def get_speed(self):
         '''
         Gets the current speed of the lift
@@ -4485,7 +4485,7 @@ class LIFT():
         @return: Current position of the lift in mm
         '''
         if self.isconn() is False:
-            return CONN_ERR 
+            return CONN_ERR
         liftspeed = self.cb.lift_get_speed()
         return liftspeed
 
@@ -4520,7 +4520,7 @@ class LIFT():
         @return: True if initialized, False otherwise
         '''
         if self.isconn() is False:
-            return CONN_ERR 
+            return CONN_ERR
         error_field = self.get_error()
 
         #Encoder mismatch is bit 3, if it's on then not inited
@@ -4531,11 +4531,11 @@ class LIFT():
 
     def init(self):
         '''
-        Sends a command that will initialize the device. 
-        The lift will move all the way down. 
+        Sends a command that will initialize the device.
+        The lift will move all the way down.
         '''
         if self.isconn() is False:
-            return CONN_ERR 
+            return CONN_ERR
         #Check for ESTOP
         if self.isESTOP() == True:
             tp_popup("Lift is in Emergency Stop state", DR_PM_WARNING)
@@ -4560,7 +4560,7 @@ class LIFT():
             if (self.isESTOP() != False):
                 tp_popup("Lift is in Emergency Stop state", DR_PM_WARNING)
                 return RET_FAIL
-            else:                
+            else:
                 if (self.get_error() != 0):
                     tp_popup("Lift error during init", DR_PM_WARNING)
                     return RET_FAIL
@@ -4575,18 +4575,18 @@ class LIFT():
         if self.isconn() is False:
             return CONN_ERR
 
-        self.cb.lift_stop() 
-        
+        self.cb.lift_stop()
+
     def move(self, trg_pos, trg_speed):
         '''
         Moves the lift to the target position with the target speed
 
         @type trg_pos: float
         @param trg_pos: target position to move to (0-900 mm)
-        @type trg_speed: float 
+        @type trg_speed: float
         @param trg_speed: target speed to move with (1-100 mm/s)
         '''
-                
+
         if self.isconn() is False:
             return CONN_ERR
 
@@ -4662,7 +4662,7 @@ class CBIO():
         @return: True if INPUT is HIGH, False INPUT is LOW
         '''
 
-        #Sanity check   
+        #Sanity check
         if io_id > 8 or io_id < 1:
             tp_popup("Invalid io_id given, 1-8 valid only", DR_PM_WARNING)
             return False
@@ -4685,8 +4685,8 @@ class CBIO():
         @param var_id: Id of the WebLogic variable (0-15)
         @rtype: int
         @return: Value of the variable
-        '''     
-        #Sanity check   
+        '''
+        #Sanity check
         if var_id > 15 or var_id < 1:
             tp_popup("Invalid var_id given, 1-15 valid only", DR_PM_WARNING)
             return RET_FAIL
@@ -4702,8 +4702,8 @@ class CBIO():
         @param var_id: Id of the WebLogic variable (0-15)
         @type value: int
         @param value: The value we want to write into the variable
-        '''     
-        #Sanity check   
+        '''
+        #Sanity check
         if var_id > 15 or var_id < 1:
             tp_popup("Invalid var_id given, 1-15 valid only", DR_PM_WARNING)
             return RET_FAIL
@@ -4712,8 +4712,8 @@ class CBIO():
             tp_popup("Invalid value given, -32768-32767 valid only", DR_PM_WARNING)
             return RET_FAIL
 
-        return self.cb.cb_set_weblogic_variable(int(var_id), int(value))    
-        
+        return self.cb.cb_set_weblogic_variable(int(var_id), int(value))
+
     def start_weblogic_prog(self, prog_id):
         '''
         Starts the given weblogic program
@@ -4754,7 +4754,7 @@ class CBIO():
             return RET_FAIL
 
         #Set IO through WebLogic
-        self.cb.cb_set_weblogic_variable(int(io_id-1), int(iostate))  
+        self.cb.cb_set_weblogic_variable(int(io_id-1), int(iostate))
 
 
     def monitor_io(self, io_id):
@@ -4892,7 +4892,7 @@ class Weblytics():
             return RET_FAIL
 
         wl_event_index = self.WL_EVENT_START_INDEX + event_index -1
-        retval = self.cb.cb_increment_weblytics_variable(int(wl_event_index), 1) 
+        retval = self.cb.cb_increment_weblytics_variable(int(wl_event_index), 1)
         return retval
 
     def get_event(self, event_index):
@@ -4911,7 +4911,7 @@ class Weblytics():
             return RET_FAIL
 
         wl_event_index = self.WL_EVENT_START_INDEX + event_index -1
-        retval = self.cb.cb_increment_weblytics_variable(int(wl_event_index), 0) 
+        retval = self.cb.cb_increment_weblytics_variable(int(wl_event_index), 0)
         return retval
 
     def cyclecounter(self):
