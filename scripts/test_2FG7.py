@@ -58,7 +58,6 @@ class Device:
             # self.cb.cb_report_robot_type(EYES_DOOSAN_ID)
             print('report_robot check')
 
-
 class TWOFG():
     '''
     This class is for handling the 2FG device
