@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 #OnRobot library for Doosan robots
 #Version: Ver 5.15.0
