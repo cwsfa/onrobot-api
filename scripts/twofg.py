@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
 import time
+from device import Device
 import numpy as np
-import xmlrpc.client
 
 '''
 XML-RPC library for controlling OnRobot devcies from Doosan robots
@@ -17,27 +17,6 @@ TWOFG_ID = 0xC0
 CONN_ERR = -2   # Error
 RET_OK = 0      # Okay
 RET_FAIL = -1   # Failed
-
-class Device:
-    '''
-    Generic device object
-    '''
-    cb = None
-
-    def __init__(self, Global_cbip='192.168.1.1'):
-        #try to get Computebox IP address
-        try:
-            self.Global_cbip = Global_cbip
-        except NameError:
-            print("Global_cbip is not defined!")
-
-    def getCB(self):
-            try:
-                self.cb = xmlrpc.client.ServerProxy(
-                    "http://" + str(self.Global_cbip) + ":41414/")
-                return self.cb
-            except TimeoutError:
-                print("Connection to ComputeBox failed!")
 
 
 class TWOFG():

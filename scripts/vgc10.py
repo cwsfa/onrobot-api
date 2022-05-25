@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
-import numpy as np
 import time
-import xmlrpc.client
+from device import Device
+import numpy as np
 
 '''
 XML-RPC library for controlling OnRobot devcies from Doosan robots
@@ -11,34 +11,12 @@ Global_cbip holds the IP address of the compute box, needs to be defined by the 
 '''
 
 #Device IDs
-VG10_ID = 0x10
 VGC10_ID = 0x11
 
-CONN_ERR = -2
-RET_OK = 0
-RET_FAIL = -1
-
-
-class Device:
-    '''
-    Generic device object
-    '''
-    cb = None
-
-    def __init__(self, Global_cbip='192.168.1.1'):
-        #try to get Computebox IP address
-        try:
-            self.Global_cbip = Global_cbip
-        except NameError:
-            print("Global_cbip is not defined!")
-
-    def getCB(self):
-            try:
-                self.cb = xmlrpc.client.ServerProxy(
-                    "http://" + str(self.Global_cbip) + ":41414/")
-                return self.cb
-            except TimeoutError:
-                print("Connection to ComputeBox failed!")
+# Connection
+CONN_ERR = -2   # Error
+RET_OK = 0      # Okay
+RET_FAIL = -1   # Failed
 
 
 class VG():
@@ -224,7 +202,3 @@ if __name__ == "__main__":
     device = Device()
     gripper_vgc10 = VG(device)
     if gripper_vgc10.isconn(): print('Connected!')
-    gripper_vgc10.grip(vacuumA=50, vacuumB=5, waiting=False)
-    time.sleep(3)
-    print("Vacuum A: {} kPa,\tVacuum B: {} kPa".format(np.round(gripper_vgc10.getvacA(),1), np.round(gripper_vgc10.getvacB(),1)))
-    gripper_vgc10.release(channelA=True, channelB=True, waiting=True)
