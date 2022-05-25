@@ -14,9 +14,9 @@ Global_cbip holds the IP address of the compute box, needs to be defined by the 
 VGC10_ID = 0x11
 
 # Connection
-CONN_ERR = -2   # Error
+CONN_ERR = -2   # Connection failure
 RET_OK = 0      # Okay
-RET_FAIL = -1   # Failed
+RET_FAIL = -1   # Error
 
 
 class VG():

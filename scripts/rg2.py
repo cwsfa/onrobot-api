@@ -14,9 +14,9 @@ Global_cbip holds the IP address of the compute box, needs to be defined by the 
 RG2_ID = 0x20
 
 # Connection
-CONN_ERR = -2   # Error
+CONN_ERR = -2   # Connection failure
 RET_OK = 0      # Okay
-RET_FAIL = -1   # Failed
+RET_FAIL = -1   # Error
 
 
 class RG():
@@ -123,7 +123,7 @@ class RG():
         else:
             return RET_OK
 
-    def halt(self, t_index):
+    def stop(self, t_index):
         '''
         Stop the grippers movement
 

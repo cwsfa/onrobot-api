@@ -14,9 +14,9 @@ Global_cbip holds the IP address of the compute box, needs to be defined by the 
 TWOFG_ID = 0xC0
 
 # Connection
-CONN_ERR = -2   # Error
+CONN_ERR = -2   # Connection failure
 RET_OK = 0      # Okay
-RET_FAIL = -1   # Failed
+RET_FAIL = -1   # Error
 
 
 class TWOFG():
@@ -49,7 +49,7 @@ class TWOFG():
 
     def isBusy(self, t_index=0):
         '''
-        Gets if the grpper is busy or not
+        Gets if the gripper is busy or not
 
         @param t_index: The position of the device (0 for single, 1 for dual primary, 2 for dual secondary)
         @type t_index: int
@@ -142,7 +142,7 @@ class TWOFG():
         currForce = self.cb.twofg_get_force(t_index)
         return currForce
 
-    def halt(self, t_index=0):
+    def stop(self, t_index=0):
         '''
         Stop the grippers movement
 
@@ -153,7 +153,7 @@ class TWOFG():
             return CONN_ERR
         self.cb.twofg_stop(t_index)
 
-    def grip_ext(self, t_index=0, t_width=20.0, n_force=20, p_speed=10, f_wait=True):
+    def grip(self, t_index=0, t_width=20.0, n_force=20, p_speed=10, f_wait=True):
         '''
         Makes an external grip with the gripper to the desired position
 
@@ -215,7 +215,7 @@ class TWOFG():
         else:
             return RET_OK
 
-    def move(self, t_index, t_width, f_wait):
+    def move(self, t_index, t_width=20.0, f_wait=True):
         '''
         Moves the gripper to the desired position
 
