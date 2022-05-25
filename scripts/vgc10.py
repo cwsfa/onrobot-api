@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import numpy as np
 import time
 import xmlrpc.client
 
@@ -71,8 +72,8 @@ class VG():
         @type vacuumB: int
         @type waiting: bool
         @param t_index: The position of the device (0 for single, 1 for dual primary, 2 for dual secondary)
-        @param vacuumA: The desired vacuum level on channel A, between 1-80
-        @param vacuumB: The desired vacuum level on channel B, between 1-80
+        @param vacuumA: The desired vacuum level on channel A, between 1-80 kPa
+        @param vacuumB: The desired vacuum level on channel B, between 1-80 kPa
         @param waiting: Wait for vacuum to build or not?
         '''
         if self.isconn(t_index) is False:
@@ -220,4 +221,10 @@ class VG():
 
 
 if __name__ == "__main__":
-    print('wtf')
+    device = Device()
+    gripper_vgc10 = VG(device)
+    if gripper_vgc10.isconn(): print('Connected!')
+    gripper_vgc10.grip(vacuumA=50, vacuumB=5, waiting=False)
+    time.sleep(3)
+    print("Vacuum A: {} kPa,\tVacuum B: {} kPa".format(np.round(gripper_vgc10.getvacA(),1), np.round(gripper_vgc10.getvacB(),1)))
+    gripper_vgc10.release(channelA=True, channelB=True, waiting=True)
