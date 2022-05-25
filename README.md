@@ -2,6 +2,13 @@
 
 This is a repository for Python API of OnRobot grippers. The `script` folder includes modules for **RG2**, **2GF7** and **VGC10** gripper models.
 
+Modules:
+
+- **Device**: `device.py`
+- **RG2**: `rg2.py`
+- **2GF7**: `twofg.py`
+- **VGC10**: `vgc10.py`
+
 ---
 
 ## Gripper Status
@@ -15,7 +22,6 @@ This is a repository for Python API of OnRobot grippers. The `script` folder inc
 ---
 
 ## Python API reference for **2FG7**
-
 
 |  Methods | Description  |  Input |
 |---|---|---|
