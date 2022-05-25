@@ -28,7 +28,7 @@ class TWOFG():
     def __init__(self, dev):
         self.cb = dev.getCB()
 
-    def isconn(self, t_index=0):
+    def isConnected(self, t_index=0):
         '''
         Returns with True if 2FG device is connected, False otherwise
 
@@ -57,7 +57,7 @@ class TWOFG():
         @rtype: bool
         @return: True if busy, False otherwise
         '''
-        if self.isconn(t_index) is False:
+        if self.isConnected(t_index) is False:
             return CONN_ERR
         return self.cb.twofg_get_busy(t_index)
 
@@ -71,7 +71,7 @@ class TWOFG():
         @rtype: bool
         @return: True if gripped, False otherwise
         '''
-        if self.isconn(t_index) is False:
+        if self.isConnected(t_index) is False:
             return CONN_ERR
         return self.cb.twofg_get_grip_detected(t_index)
 
@@ -85,7 +85,7 @@ class TWOFG():
         @rtype: int
         @return: Status code of the device
         '''
-        if self.isconn(t_index) is False:
+        if self.isConnected(t_index) is False:
             return CONN_ERR
         status = self.cb.twofg_get_status(t_index)
         return status
@@ -98,7 +98,7 @@ class TWOFG():
         @return: External width in mm
         @rtype: float
         '''
-        if self.isconn(t_index) is False:
+        if self.isConnected(t_index) is False:
             return CONN_ERR
         extWidth = self.cb.twofg_get_external_width(t_index)
         return extWidth
@@ -111,7 +111,7 @@ class TWOFG():
         @return: Minimum external width in mm
         @rtype: float
         '''
-        if self.isconn(t_index) is False:
+        if self.isConnected(t_index) is False:
             return CONN_ERR
         extMinWidth = self.cb.twofg_get_min_external_width(t_index)
         return extMinWidth
@@ -124,7 +124,7 @@ class TWOFG():
         @return: Maximum external width in mm
         @rtype: float
         '''
-        if self.isconn(t_index) is False:
+        if self.isConnected(t_index) is False:
             return CONN_ERR
         extMaxWidth = self.cb.twofg_get_max_external_width(t_index)
         return extMaxWidth
@@ -137,7 +137,7 @@ class TWOFG():
         @return: Force in N
         @rtype: float
         '''
-        if self.isconn(t_index) is False:
+        if self.isConnected(t_index) is False:
             return CONN_ERR
         currForce = self.cb.twofg_get_force(t_index)
         return currForce
@@ -149,7 +149,7 @@ class TWOFG():
         @param t_index: The position of the device (0 for single, 1 for dual primary, 2 for dual secondary)
         @type t_index: int
         '''
-        if self.isconn(t_index) is False:
+        if self.isConnected(t_index) is False:
             return CONN_ERR
         self.cb.twofg_stop(t_index)
 
@@ -167,7 +167,7 @@ class TWOFG():
         @type f_wait: bool
         @param f_wait: wait for the grip to end or not?
         '''
-        if self.isconn(t_index) is False:
+        if self.isConnected(t_index) is False:
             return CONN_ERR
 
         #Sanity check
@@ -225,7 +225,7 @@ class TWOFG():
         @type f_wait: bool
         @param f_wait: wait for the grip to end or not?
         '''
-        if self.isconn(t_index) is False:
+        if self.isConnected(t_index) is False:
             return CONN_ERR
 
         max = self.get_max_ext_width(t_index)
@@ -257,4 +257,4 @@ if __name__ == '__main__':
     device = Device()
     device.getCB()
     gripper_2FG7 = TWOFG(device)
-    print("Connection check: ", gripper_2FG7.isconn())
+    print("Connection check: ", gripper_2FG7.isConnected())

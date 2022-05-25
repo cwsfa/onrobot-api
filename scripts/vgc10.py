@@ -28,7 +28,7 @@ class VG():
     def __init__(self, dev):
         self.cb = dev.getCB()
 
-    def isconn(self, t_index=0):
+    def isConnected(self, t_index=0):
         '''
         Returns with True if a VGC10 device is connected, False otherwise
 
@@ -54,7 +54,7 @@ class VG():
         @param vacuumB: The desired vacuum level on channel B, between 1-80 kPa
         @param waiting: Wait for vacuum to build or not?
         '''
-        if self.isconn(t_index) is False:
+        if self.isConnected(t_index) is False:
             return CONN_ERR
         self.cb.vg10_grip(t_index, 0, float(vacuumA))
         self.cb.vg10_grip(t_index, 1, float(vacuumB))
@@ -94,7 +94,7 @@ class VG():
         @param channelB: True turns the channel off, False leaves the channel running
         @param waiting: Wait for complete vacuum loss or not?
         '''
-        if self.isconn(t_index) is False:
+        if self.isConnected(t_index) is False:
             return CONN_ERR
 
         self.cb.vg10_release(t_index, channelA, channelB)
@@ -160,7 +160,7 @@ class VG():
         @rtype: float
         @return: Vacuum level
         '''
-        if self.isconn(t_index) is False:
+        if self.isConnected(t_index) is False:
             return CONN_ERR
         vacAB = self.cb.vg10_get_all_double_variables(t_index)
         if len(vacAB) > 1:
@@ -176,7 +176,7 @@ class VG():
         @rtype: float
         @return: Vacuum level
         '''
-        if self.isconn(t_index) is False:
+        if self.isConnected(t_index) is False:
             return CONN_ERR
         vacAB = self.cb.vg10_get_all_double_variables(t_index)
         if len(vacAB) > 1:
@@ -193,7 +193,7 @@ class VG():
         @type channelA: bool
         @type channelB: bool
         '''
-        if self.isconn(t_index) is False:
+        if self.isConnected(t_index) is False:
             return CONN_ERR
         self.cb.vg10_idle(t_index, channelA, channelB)
 
@@ -201,4 +201,4 @@ class VG():
 if __name__ == "__main__":
     device = Device()
     gripper_vgc10 = VG(device)
-    if gripper_vgc10.isconn(): print('Connected!')
+    if gripper_vgc10.isConnected(): print('Connected!')

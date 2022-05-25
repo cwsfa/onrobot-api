@@ -29,7 +29,7 @@ class RG():
         super().__init__()
         self.cb = dev.getCB()
 
-    def isconn(self, t_index):
+    def isConnected(self, t_index):
         '''
         Returns with True if a RG2 device is connected, False otherwise
 
@@ -56,7 +56,7 @@ class RG():
         @type fwait: bool
         @param fwait: wait for the move to end or not?
         '''
-        if self.isconn(t_index) is False:
+        if self.isConnected(t_index) is False:
             return CONN_ERR
 
         self.cb.rg_grip(t_index, float(twidth), float(tforce))
@@ -90,7 +90,7 @@ class RG():
         @type fwait: bool
         @param fwait: wait for the grip to end or not?
         '''
-        if self.isconn(t_index) is False:
+        if self.isConnected(t_index) is False:
             return CONN_ERR
 
         self.cb.rg_grip(t_index, float(twidth), float(tforce))
@@ -130,7 +130,7 @@ class RG():
         @param t_index: The position of the device (0 for single, 1 for dual primary, 2 for dual secondary)
         @type t_index: int
         '''
-        if self.isconn(t_index) is False:
+        if self.isConnected(t_index) is False:
             return CONN_ERR
         return self.cb.rg_stop(t_index)
 
@@ -144,7 +144,7 @@ class RG():
         @rtype: float
         @return: Speed in mm/s
         '''
-        if self.isconn(t_index) is False:
+        if self.isConnected(t_index) is False:
             return CONN_ERR
         return self.cb.rg_get_speed(t_index)
 
@@ -158,7 +158,7 @@ class RG():
         @rtype: float
         @return: Depth in mm
         '''
-        if self.isconn(t_index) is False:
+        if self.isConnected(t_index) is False:
             return CONN_ERR
         return self.cb.rg_get_depth(t_index)
 
@@ -172,7 +172,7 @@ class RG():
         @rtype: float
         @return: Depth in mm
         '''
-        if self.isconn(t_index) is False:
+        if self.isConnected(t_index) is False:
             return CONN_ERR
         return self.cb.rg_get_relative_depth(t_index)
 
@@ -186,7 +186,7 @@ class RG():
         @rtype: float
         @return: Width in mm
         '''
-        if self.isconn(t_index) is False:
+        if self.isConnected(t_index) is False:
             return CONN_ERR
         return self.cb.rg_get_width(t_index)
 
@@ -200,7 +200,7 @@ class RG():
         @rtype: float
         @return: Fingertip offset in mm
         '''
-        if self.isconn(t_index) is False:
+        if self.isConnected(t_index) is False:
             return CONN_ERR
         return self.cb.rg_get_fingertip_offset(t_index)
 
@@ -214,7 +214,7 @@ class RG():
         @rtype: bool
         @return: True if busy, False otherwise
         '''
-        if self.isconn(t_index) is False:
+        if self.isConnected(t_index) is False:
             return CONN_ERR
         return self.cb.rg_get_busy(t_index)
 
@@ -228,7 +228,7 @@ class RG():
         @rtype: bool
         @return: True if gripped, False otherwise
         '''
-        if self.isconn(t_index) is False:
+        if self.isConnected(t_index) is False:
             return CONN_ERR
         return self.cb.rg_get_grip_detected(t_index)
 
@@ -242,7 +242,7 @@ class RG():
         @rtype: bool
         @return: True if safety triggered, False otherwise
         '''
-        if self.isconn(t_index) is False:
+        if self.isConnected(t_index) is False:
             return CONN_ERR
         s1 = self.cb.rg_get_s1_triggered(t_index)
         s2 = self.cb.rg_get_s2_triggered(t_index)
@@ -260,7 +260,7 @@ class RG():
         @param ft_offset: Finger tip offset
         @type   ft_offset: float
         '''
-        if self.isconn(t_index) is False:
+        if self.isConnected(t_index) is False:
             return CONN_ERR
         return self.cb.rg_set_fingertip_offset(t_index, float(ft_offset))
 
@@ -272,7 +272,7 @@ class RG():
         @param t_index: The position of the device (0 for single, 1 for dual primary, 2 for dual secondary)
         @type t_index: int
         '''
-        if self.isconn(t_index) is False:
+        if self.isConnected(t_index) is False:
             return CONN_ERR
         self.cb.cb_reset_tool_power()
 
@@ -280,4 +280,4 @@ class RG():
 if __name__ == '__main__':
     device = Device()
     gripper_RG2 = RG(device)
-    print("Connection check: ", gripper_RG2.isconn())
+    print("Connection check: ", gripper_RG2.isConnected())
