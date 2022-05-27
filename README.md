@@ -27,13 +27,13 @@ Modules:
 |---|---|---|
 | grip  | Moves the gripper to the desired position  | **t_width**: *Default=20.0 (mm)*, **n_force**: *Default=20 (N)*, **p_speed**: *Default=10(%)*, **f_wait**: *Default=True*  |
 | move  | Moves the gripper to the desired position  | **t_width**: *Default=20.0 (mm)*, **f_wait**: *Default=True*|
+| stop  | Stops the action  | - |
 | isConnected  | Returns **True** if the gripper is connected, **False** otherwise  | - |
 | isBusy  | Returns **True** if there is an obstacle during operation, **False** otherwise   | - |
 | isGripped  | Returns **True** if an object is gripped, **False** otherwise   | - |
 | getStatus  | Returns current status of the gripper (No connection=-2, Error=-1, Stable=0)  | - |
 | get_ext_width  | Returns current width between fingers | - |
 | get_force  | Returns current force on the gripper (in Newton) | - |
-| stop  | Stops the action  | - |
 | get_min_ext_width  | Returns minimum gripping width  | - |
 | get_max_ext_width  | Returns minimum gripping width  | - |
 
